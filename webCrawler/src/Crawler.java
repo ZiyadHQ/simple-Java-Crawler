@@ -33,6 +33,9 @@ public class Crawler {
 	
 	//Error buffer List(instead of printing every error as it happens, store them in a buffer for the user to decide what to do with)
 	List<String> Error;
+
+	//control flow flag, it stops the Browse() loops and allows a customized branching behavior
+	boolean flag;
 	
 	//the string that will be used to start the crawling process
 	public Crawler(String URL, int cycle, String parser) {
@@ -44,6 +47,7 @@ public class Crawler {
 		Error = new ArrayList<String>();
 		parserRegex = parser;
 		fileBuffer = new Set();
+		flag = true;
 		
 		//KickStarts the process by trying to load all the possible branch URLs
 		Browse(rootURL);
@@ -59,6 +63,7 @@ public class Crawler {
 		Error = new ArrayList<String>();
 		parserRegex = parser;
 		fileBuffer = new Set();
+		flag = true;
 		
 		//KickStarts the process by trying to load all the possible branch URLs
 		Browse(rootURL);
@@ -119,7 +124,8 @@ public class Crawler {
 		Matcher parse = parser.matcher(input);
 		Pattern regex = Pattern.compile("https:[a-zA-Z0-9._%+-/]*" + siteToBrowse + "[a-zA-Z0-9._%+-/]+");
 		Matcher match = regex.matcher(input);
-		while(match.find()) {
+		
+		while(match.find() && flag) {
 			setOfURLs.add(match.group());
 			if(cycle-- == 0) {
 				cycle = cycleSize;
@@ -127,7 +133,7 @@ public class Crawler {
 			}
 		}
 		
-		while(parse.find()) {
+		while(parse.find() && flag) {
 			fileBuffer.add(parse.group());
 		}
 		
