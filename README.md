@@ -15,5 +15,3 @@ Crawler class can be created using two constructurs:
 
   the Set class is a personal implementation of Sets, it stores data in a Container class, the Container contains a{String data} field and a {int score} field, the score is used to evaluate how popular a data string is and also has a utility
   to replace the {List<Container> visited} list that is used with BFS implementations
-
-  TODO: add a flag functionality as to allow the Cycle() method to become a flow control method, flag will be added to the Browse() method
