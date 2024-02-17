@@ -18,7 +18,10 @@ public class CrawlerImg extends Crawler{
 		
 	
 	public void Cycle() {
-	}
-	
-	
+		if(this.fileBuffer.size() > 300){
+			this.flag = false;
+		}
+
+		
+		
 }
